@@ -124,6 +124,9 @@ const nevigationFeature = () => {
     let backToHomeM = document.querySelector('.back-to-home-motivation')
     const motivationQuoteSection = document.querySelector('.motivation-quote-section')
     const motivationCard = document.querySelector('.motivation-card')
+    const backToHomePomodoro = document.querySelector('.back-to-home-pomodoro')
+    const pomodoroSection = document.querySelector('.pomodoro-section')
+    const pomodoroCard = document.querySelector('.pomodoro-card')
 
 
     homeNavButton.addEventListener('click', () => {
@@ -188,6 +191,20 @@ const nevigationFeature = () => {
 
     motivationCard.addEventListener('click', () => {
         motivationQuoteSection.style.display = 'flex'
+        header.style.display = 'none'
+        featureCardSectio.style.display = 'none'
+        nav.style.display = 'none'
+    })
+
+    backToHomePomodoro.addEventListener('click', () => {
+        pomodoroSection.style.display = 'none'
+        header.style.display = 'block'
+        featureCardSectio.style.display = 'flex'
+        nav.style.display = 'flex'
+    })
+
+    pomodoroCard.addEventListener('click', () => {
+        pomodoroSection.style.display = 'block'
         header.style.display = 'none'
         featureCardSectio.style.display = 'none'
         nav.style.display = 'none'
@@ -372,7 +389,113 @@ const motivation = () => {
 
 }
 
+const pomodoro = () => {
+    let focus = document.querySelector('.focus')
+    let short = document.querySelector('.short')
+    let long = document.querySelector('.long')
+    let timer = document.querySelector('.timer')
+    let start = document.querySelector('.start')
+    let playPause = document.querySelector('.paly-pause')
+    let pauseReset = document.querySelector('.pause-reset')
+    let pause = document.querySelector('.pause')
+    let reset = document.querySelector('.reset')
+    let shortTime = document.querySelector('.short-time')
+    let longTime = document.querySelector('.long-time')
+    let focusTime = document.querySelector('.focus-time')
 
+    let interval
+    let timeLeft = 10; 
+
+
+    const updateTime = () => {
+        let minutes = Math.floor(timeLeft/60)
+        let secoends = timeLeft % 60
+        let formattedTime = `${minutes.toString().padStart(2,"0")}:${secoends.toString().padStart(2,"0")}`
+        timer.innerHTML = formattedTime
+    }
+
+
+    start.addEventListener('click', () => {
+        interval = setInterval(()=>{
+            timeLeft--;
+            updateTime()
+            if(timeLeft === 0){
+                alert('Time is up!')
+                clearInterval(interval)
+                timeLeft = 1500
+                updateTime()
+                playPause.classList.replace('ri-pause-large-fill', 'ri-play-large-fill')
+                start.style.display = 'block'
+                pauseReset.style.display = 'none'
+            }
+        },1000)
+
+        playPause.classList.replace('ri-play-large-fill', 'ri-pause-large-fill')
+
+        start.style.display = 'none'
+        pauseReset.style.display = 'flex'
+
+    })
+
+    pause.addEventListener('click', () => {
+        clearInterval(interval)
+        playPause.classList.replace('ri-pause-large-fill', 'ri-play-large-fill')
+        start.style.display = 'block'
+        pauseReset.style.display = 'none'
+    })
+
+    reset.addEventListener('click', () => {
+        clearInterval(interval)
+        timeLeft = 1500
+        updateTime()
+    })
+
+
+    reset.addEventListener('click', () => {
+        clearInterval(interval)
+        timeLeft = 1500
+        updateTime()
+        playPause.classList.replace('ri-pause-large-fill', 'ri-play-large-fill')
+        start.style.display = 'block'
+        pauseReset.style.display = 'none'
+    })
+
+    focus.addEventListener('click', () => {
+        timer.textContent = foramttedTime = "25:00"
+        timeLeft = 1500
+        clearInterval(interval)
+        playPause.classList.replace('ri-pause-large-fill', 'ri-play-large-fill')
+        start.style.display = 'block'
+        pauseReset.style.display = 'none'
+        shortTime.classList.remove('text-[#9624d3]')
+        longTime.classList.remove('text-[#9624d3]')
+        focusTime.classList.add('text-[#9624d3]')
+    })
+
+    short.addEventListener('click', () => {
+        timer.textContent = foramttedTime = "05:00"
+        timeLeft = 300
+        clearInterval(interval)
+        playPause.classList.replace('ri-pause-large-fill', 'ri-play-large-fill')
+        start.style.display = 'block'
+        pauseReset.style.display = 'none'
+        focusTime.classList.remove('text-[#9624d3]')
+        shortTime.classList.add('text-[#9624d3]')
+        longTime.classList.remove('text-[#9624d3]')
+    })
+
+    long.addEventListener('click', () => {
+        timer.textContent = foramttedTime = "15:00"
+        timeLeft = 900
+        clearInterval(interval)
+        playPause.classList.replace('ri-pause-large-fill', 'ri-play-large-fill')
+        start.style.display = 'block'
+        pauseReset.style.display = 'none'
+        focusTime.classList.remove('text-[#9624d3]')
+        longTime.classList.add('text-[#9624d3]')
+        shortTime.classList.remove('text-[#9624d3]')
+    })
+}
 
 const parentFun = () => {
     motivation()
@@ -381,7 +504,7 @@ const parentFun = () => {
     showDate()
     weather()
     dailyPLaner()
-
+    pomodoro()
 }
 parentFun()
 
