@@ -121,6 +121,9 @@ const nevigationFeature = () => {
     const backToHomePlannerBtn = document.querySelector('.daily-planner-section .back-to-home')
     const plannerCard = document.querySelector('.daily-planner-card')
     const nav = document.querySelector('nav')
+    let backToHomeM = document.querySelector('.back-to-home-motivation')
+    const motivationQuoteSection = document.querySelector('.motivation-quote-section')
+    const motivationCard = document.querySelector('.motivation-card')
 
 
     homeNavButton.addEventListener('click', () => {
@@ -176,9 +179,21 @@ const nevigationFeature = () => {
         nav.style.display = 'flex'
     })
 
+    backToHomeM.addEventListener('click', () => {
+        motivationQuoteSection.style.display = 'none'
+        header.style.display = 'block'
+        featureCardSectio.style.display = 'flex'
+        nav.style.display = 'flex'
+    })
+
+    motivationCard.addEventListener('click', () => {
+        motivationQuoteSection.style.display = 'flex'
+        header.style.display = 'none'
+        featureCardSectio.style.display = 'none'
+        nav.style.display = 'none'
+    })
 
 }
-
 
 const dailyPLaner = () => {
 
@@ -260,10 +275,107 @@ const dailyPLaner = () => {
 
 }
 
+const motivation = () => {
+    let quote = document.querySelector('.quote')
+    let author = document.querySelector('.author')
+    let quoteBtn = document.querySelector('.quote-btn')
+
+    const quotes = [
+    {
+        quote: "The only way to do great work is to love what you do.",
+        author: "Steve Jobs"
+    },
+    {
+        quote: "Believe you can and you're halfway there.",
+        author: "Theodore Roosevelt"
+    },
+    {
+        quote: "It always seems impossible until it's done.",
+        author: "Nelson Mandela"
+    },
+    {
+        quote: "Success is not final, failure is not fatal.",
+        author: "Winston Churchill"
+    },
+    {
+        quote: "Don't watch the clock; do what it does. Keep going.",
+        author: "Sam Levenson"
+    },
+    {
+        quote: "The future depends on what you do today.",
+        author: "Mahatma Gandhi"
+    },
+    {
+        quote: "Dream big and dare to fail.",
+        author: "Norman Vincent Peale"
+    },
+    {
+        quote: "Act as if what you do makes a difference. It does.",
+        author: "William James"
+    },
+    {
+        quote: "Start where you are. Use what you have. Do what you can.",
+        author: "Arthur Ashe"
+    },
+    {
+        quote: "Great things are done by a series of small things brought together.",
+        author: "Vincent van Gogh"
+    },
+    {
+        quote: "Hard work beats talent when talent doesn't work hard.",
+        author: "Tim Notke"
+    },
+    {
+        quote: "The secret of getting ahead is getting started.",
+        author: "Mark Twain"
+    },
+    {
+        quote: "Success is the sum of small efforts, repeated day in and day out.",
+        author: "Robert Collier"
+    },
+    {
+        quote: "Do something today that your future self will thank you for.",
+        author: "Sean Patrick Flanery"
+    },
+    {
+        quote: "You don't have to be great to start, but you have to start to be great.",
+        author: "Zig Ziglar"
+    },
+    {
+        quote: "A little progress each day adds up to big results.",
+        author: "Unknown"
+    },
+    {
+        quote: "Difficult roads often lead to beautiful destinations.",
+        author: "Zig Ziglar"
+    },
+    {
+        quote: "Don't limit your challenges. Challenge your limits.",
+        author: "Jerry Dunn"
+    },
+    {
+        quote: "Success doesn't come from what you do occasionally. It comes from what you do consistently.",
+        author: "Marie Forleo"
+    },
+    {
+        quote: "Keep your face always toward the sunshine, and shadows will fall behind you.",
+        author: "Walt Whitman"
+    }
+];
+
+    quoteBtn.addEventListener('click', () => {
+        let randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+        quote.textContent = `"${randomQuote.quote}"`
+        author.textContent = `— ${randomQuote.author}`
+    })
+
+
+}
+
 
 
 const parentFun = () => {
-
+    motivation()
     nevigationFeature()
     toDo()
     showDate()
